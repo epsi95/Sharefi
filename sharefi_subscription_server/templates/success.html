@@ -1,0 +1,42 @@
+{% include "header.html" %}
+
+<div class="container-sm mt-5">
+  <div class="card p-3">
+    <div class="text-center my-3">
+      <img src="/static/ShareFi.svg" class="rounded" alt="ShareFi Logo" width="90px">
+      <p class="my-2 display-4">Enjoy Wifi!</p>
+    </div>
+      <p>Open your Wifi list and connect to <kbd class="p-1">TP-Link_B45E</kbd> and provide the password given below. Your subscription will expire at
+      <span class="bg-warning p-1">{{subscription_end_date}}</span></p>
+
+    <form>
+      <label for="wifiPassword" class="form-label">WiFi Password</label>
+      <input type="text" class="form-control" id="wifiPassword" aria-describedby="passwordHelp" value="{{wifi_password}}" onclick="copyText(this)">
+      <div id="passwordHelp" class="form-text">tap to copy</div>
+  </form>
+  </div>
+</div>
+
+<script>
+    let timer = null;
+    let status = document.getElementById("passwordHelp");
+
+   function copyText() {
+      textField = document.getElementById("wifiPassword");
+      textField.select();
+      textField.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+
+      status.innerText = "copied!";
+      if(timer){
+      clearTimeout(timer);
+      }
+      setTimeout(()=>{
+      status.innerText = "tap to copy!";
+      clearTimeout(timer);
+      timer = null;
+      }, 1000);
+}
+</script>
+
+{% include "footer.html" %}

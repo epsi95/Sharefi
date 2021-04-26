@@ -1,0 +1,38 @@
+{% include "header.html" %}
+<div class="container-sm mt-5">
+  <div class="card p-3">
+    <div class="text-center my-3">
+      <img src="/static/ShareFi.svg" class="rounded" alt="ShareFi Logo" width="90px">
+      <p class="my-2 display-4">Payment</p>
+    </div>
+      <button id="rzp-button1" type="submit" class="btn btn-primary">Pay ₹7.0</button>
+    </div>
+  </form>
+  </div>
+</div>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+
+    var options = {
+        "key": "{{ RAZORPAY_ID }}", // Enter the Key ID generated from the Dashboard
+        "amount": "{{ amount }}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "INR",
+        "name": "ShareFi",
+        "description": "For wifi subscription",
+        "image": "{{ logo }}",
+        "order_id": "{{ order_id }}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "callback_url": "{{ callback_url }}/charge",
+        "prefill": {
+            "name": "{{ user_name }}",
+            "email": "",
+            "contact": "{{ user_mobile_number }}"    },
+        "notes": {
+            "address": "Sadguru Enclave, Old Delhi Gurgaon Road, 122015, Haryana"    },
+        "theme": {        "color": "#3399cc"    }};
+var rzp1 = new Razorpay(options);
+document.getElementById('rzp-button1').onclick = function(e){
+        rzp1.open();
+        e.preventDefault();
+    }
+    </script>
+{% include "footer.html" %}

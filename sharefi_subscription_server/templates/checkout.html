@@ -1,0 +1,75 @@
+{% include "header.html" %}
+<div class="container-sm mt-5">
+    <div class="card p-3">
+        <div class="text-center my-3">
+            <img src="/static/ShareFi.svg" class="rounded" alt="ShareFi Logo" width="90px">
+            <p class="my-2 display-4">Checkout</p>
+        </div>
+        <form action="/checkOut" method="POST">
+            <label for="userMobileNumber" class="form-label">Mobile Number</label>
+            <input type="tel" name="mobileNumber" class="form-control" id="userMobileNumber"
+                   aria-describedby="mobileNumberHelp" required
+                   maxlength="10" value="{{ user_mobile_number }}" disabled>
+
+            <label for="userName" class="form-label">Name</label>
+            <input type="text" name="userName" class="form-control" id="userName" required placeholder="Narendra Modi"
+                   value="{{ user_name}}" disabled>
+
+            <label for="userMac" class="form-label">MAC Address</label>
+            <input type="text" name="userMac" class="form-control" id="userMac" aria-describedby="macHelp" required
+                   maxlength="17" placeholder="xx:xx:xx:xx:xx:xx" value="{{user_mac}}" disabled>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked1" checked
+                       onclick="checkBoxStateChange1(this)">
+                <label class="form-check-label" for="flexCheckChecked1">
+                    I understand that in case of electricity outage, I won't be able to use
+                    the wifi connection and my money will not be refunded.
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2" checked
+                       onclick="checkBoxStateChange2(this)">
+                <label class="form-check-label" for="flexCheckChecked2">
+                    I understand that in case the internet service is down I won't be able to use
+                    the wifi connection and my money will not be refunded.
+                </label>
+            </div>
+            <div class="text-center pt-3">
+                <button type="submit" class="btn btn-primary" id="submit-btm">I Agree</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    let btn = document.getElementById("submit-btm");
+    let btn1 = true;
+    let btn2 = true;
+
+    function checkBoxStateChange1(e){
+    if(e.checked){
+        btn1 = true;
+    }else{
+        btn1 = false;
+    }
+    setButtonState();
+    }
+    function checkBoxStateChange2(e){
+    if(e.checked){
+        btn2 = true;
+    }else{
+        btn2 = false;
+    }
+    setButtonState();
+    }
+    function setButtonState(){
+    if(btn1 && btn2){
+    btn.disabled = false;
+    }else{
+    btn.disabled = true;
+    }
+    }
+
+</script>
+
+{% include "footer.html" %}

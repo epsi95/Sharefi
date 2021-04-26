@@ -1,0 +1,21 @@
+{% include "header.html" %}
+
+<div class="container-sm mt-5">
+  <div class="card p-3">
+    <div class="text-center my-3">
+      <img src="/static/ShareFi.svg" class="rounded" alt="ShareFi Logo" width="90px">
+      <p class="my-2 display-4">Unlimited Internet only @₹7.0/day</p>
+    </div>
+    <form action="/checkNumber" method="POST">
+      <label for="userMobileNumber" class="form-label">Mobile Number</label>
+      <input type="tel" name="mobileNumber" class="form-control" id="userMobileNumber" aria-describedby="mobileNumberHelp" required
+        maxlength="10">
+      <div id="mobileNumberHelp" class="form-text">We'll never share your number with anyone else.</div>
+    <div class="text-center pt-3">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+  </div>
+</div>
+
+{% include "footer.html" %}

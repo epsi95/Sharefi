@@ -1,0 +1,48 @@
+{% include "header.html" %}
+
+<div class="container-sm mt-5">
+  <div class="card p-3">
+    <div class="text-center my-3">
+      <img src="/static/ShareFi.svg" class="rounded" alt="ShareFi Logo" width="90px">
+      <p class="my-2 display-4">OTP Validation</p>
+    </div>
+    <form action="{{on_otp_submit_url}}" method="POST">
+      <label for="otp" class="form-label">OTP</label>
+      <input type="number" name="otp" class="form-control" id="otp" required max="999999" aria-describedby="otpHelp">
+      <div id="otpHelp" class="form-text text-danger" style="display:{{display_state}};">OTP is not valid</div>
+    <p id="resend-otp" class="text-primary text-end" onclick="resendOtp()">resend OTP</p>
+      <div class="text-center pt-3">
+      <button type="submit" class="btn btn-primary">Validate</button>
+    </div>
+  </form>
+  </div>
+</div>
+
+<script>
+  let status = document.getElementById("resend-otp");
+  let timer = null;
+  let waitTime = 0;
+
+  function resendOtp(){
+      if(!timer){
+          status.innerText = "requesting...";
+          fetch("/resendOtp").then((e)=>{
+              return e.text();
+          }).then((e)=>{
+              console.log(e);
+              waitTime = 60;
+              timer = setInterval(()=>{
+                  status.innerText = '00:'+ String(waitTime).padStart(2,0);
+                  waitTime--;
+                  if(waitTime < 0){
+                  clearInterval(timer);
+                  timer = null;
+                  status.innerText = "resend OTP";
+                  }
+              }, 1000);
+          }).catch((e)=>console.log(e));
+      }
+    }
+</script>
+
+{% include "footer.html" %}

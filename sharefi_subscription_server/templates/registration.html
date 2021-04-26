@@ -1,0 +1,31 @@
+{% include "header.html" %}
+
+<div class="container-sm mt-5">
+  <div class="card p-3">
+    <div class="text-center my-3">
+      <img src="/static/ShareFi.svg" class="rounded" alt="ShareFi Logo" width="90px">
+      <p class="my-2 display-4">We don't know you! Please register.</p>
+    </div>
+    <form action="/userRegistration" method="POST">
+
+      <label for="userMobileNumber" class="form-label">Mobile Number</label>
+      <input type="tel" name="mobileNumber" class="form-control" id="userMobileNumber" aria-describedby="mobileNumberHelp" required
+        maxlength="10" value="{{ mobile_number }}">
+      <div id="mobileNumberHelp" class="form-text">We'll never share your number with anyone else.</div>
+
+      <label for="userName" class="form-label">Name</label>
+      <input type="text" name="userName" class="form-control" id="userName" required placeholder="Narendra Modi">
+
+      <label for="userMac" class="form-label">MAC Address</label>
+      <input type="text" name="userMac" class="form-control" id="userMac" aria-describedby="macHelp" required
+        maxlength="17" placeholder="xx:xx:xx:xx:xx:xx">
+      <div id="macHelp" class="form-text">How can I find my <a href="/macInfo">MAC?</a></div>
+
+    <div class="text-center pt-3">
+      <button type="submit" class="btn btn-primary">Generate OTP</button>
+    </div>
+  </form>
+  </div>
+</div>
+
+{% include "footer.html" %}
